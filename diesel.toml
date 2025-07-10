@@ -1,0 +1,16 @@
+# Para PostgreSQL
+[print_schema]
+file = "src/schema.rs"
+custom_type_derives = ["diesel_derive_enum::DbEnum"]
+
+# Configuração do banco de dados
+# [database]
+# url = "postgresql://postgres:postgres123@localhost:5434/courses_crud"
+
+# Configuração para migrações
+[migrations_directory]
+dir = "migrations"
+
+# Configuração para o schema
+# [schema]
+# file = "src/schema.rs"
