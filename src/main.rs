@@ -10,30 +10,9 @@ mod domains;
 
 use config::db::DbPool;
 use crate::domains::auth::models::user_models::*;
-
-#[derive(serde::Serialize, Debug)]
-pub struct UserResponse {
-    pub id: uuid::Uuid,
-    pub email: String,
-    pub name: String,
-    pub created_at: chrono::DateTime<chrono::Utc>,
-}
+use crate::domains::auth::models::register_models::*;
 
 #[macro_use] extern crate rocket;
-
-#[derive(FromForm, Debug)]
-struct UserRegister<'r> {
-    email: &'r str,
-    password: &'r str,
-    name: &'r str,
-}
-
-#[derive(serde::Serialize, Debug)]
-struct UserRegistrationResponse {
-    token: Option<String>,
-    message: String,
-    user: Option<UserResponse>,
-}
 
 #[derive(serde::Serialize, Debug)]
 struct ConfigInfo {
