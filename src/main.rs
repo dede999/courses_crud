@@ -2,13 +2,14 @@ use rocket::{form::Form, http::Status, serde::json::Json, State};
 use dotenv::dotenv;
 use std::env;
 use diesel::prelude::*;
+use config::db;
 
 mod models;
 mod schema;
-mod db;
+mod config;
 
 use models::*;
-use db::DbPool;
+use config::db::DbPool;
 
 #[macro_use] extern crate rocket;
 
