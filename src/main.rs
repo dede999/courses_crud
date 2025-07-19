@@ -14,28 +14,12 @@ use crate::domains::auth::models::register_models::*;
 
 #[macro_use] extern crate rocket;
 
-#[derive(serde::Serialize, Debug)]
-struct ConfigInfo {
-    database_url: String,
-    rabbitmq_url: String,
-    rocket_address: String,
-    rocket_port: String,
-}
 
 #[get("/hello")]
 fn index() -> &'static str {
     "Hello, world! 🌎"
 }
 
-#[get("/config")]
-fn get_config() -> Json<ConfigInfo> {
-    Json(ConfigInfo {
-        database_url: env::var("DATABASE_URL").unwrap_or_else(|_| "not set".to_string()),
-        rabbitmq_url: env::var("RABBITMQ_URL").unwrap_or_else(|_| "not set".to_string()),
-        rocket_address: env::var("ROCKET_ADDRESS").unwrap_or_else(|_| "0.0.0.0".to_string()),
-        rocket_port: env::var("ROCKET_PORT").unwrap_or_else(|_| "8000".to_string()),
-    })
-}
 
 #[post("/register", data = "<user>")]
 fn register(user: Form<UserRegister<'_>>, pool: &State<DbPool>) -> (Status, Json<UserRegistrationResponse>) {
@@ -115,6 +99,6 @@ fn rocket() -> _ {
     
     rocket::build()
         .manage(pool)
-        .mount("/api/v1", routes![index, get_config])
+        .mount("/api/v1", routes![index])
         .mount("/api/v1/auth", routes![register, get_users])
 }
