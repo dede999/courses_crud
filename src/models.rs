@@ -3,26 +3,6 @@ use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
 use uuid::Uuid;
 
-#[derive(Debug, Serialize, Deserialize, Queryable, Selectable)]
-#[diesel(table_name = crate::schema::users)]
-#[diesel(check_for_backend(diesel::pg::Pg))]
-pub struct User {
-    pub id: Uuid,
-    pub email: String,
-    pub password_hash: String,
-    pub name: String,
-    pub created_at: DateTime<Utc>,
-    pub updated_at: DateTime<Utc>,
-}
-
-#[derive(Debug, Serialize, Deserialize, Insertable)]
-#[diesel(table_name = crate::schema::users)]
-pub struct NewUser {
-    pub email: String,
-    pub password_hash: String,
-    pub name: String,
-}
-
 // #[derive(Debug, Serialize, Deserialize, Queryable, Selectable)]
 // #[diesel(table_name = crate::schema::courses)]
 // #[diesel(check_for_backend(diesel::pg::Pg))]
@@ -65,15 +45,6 @@ pub struct NewUser {
 //     pub course_id: i32,
 //     pub status: String,
 // }
-
-// DTOs para API
-#[derive(Debug, Serialize, Deserialize)]
-pub struct UserResponse {
-    pub id: Uuid,
-    pub email: String,
-    pub name: String,
-    pub created_at: DateTime<Utc>,
-}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CourseResponse {
