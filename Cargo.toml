@@ -21,3 +21,4 @@ uuid = { version = "1.0", features = ["v4", "serde"] }
 bcrypt = "0.15"
 jsonwebtoken = "9.0"
 async-trait = "0.1.88"
+mockall = "0.13.1"
