@@ -5,6 +5,7 @@ use crate::domains::auth::repositories::user_repository::UserRepository;
 use diesel::prelude::*;
 use uuid::Uuid;
 use async_trait::async_trait;
+use crate::infrastructure::traits::model_response::ModelResponse;
 
 pub struct UserRepositoryImp {
     pub pool: DbPool

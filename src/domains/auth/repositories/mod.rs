@@ -1,2 +1,2 @@
-mod user_repository;
-mod user_repository_imp;
+pub mod user_repository;
+pub mod user_repository_imp;
