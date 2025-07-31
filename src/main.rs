@@ -7,6 +7,8 @@ use config::db;
 mod schema;
 mod config;
 mod domains;
+mod core;
+mod infrastructure;
 
 use config::db::DbPool;
 use crate::domains::auth::models::user_models::*;
@@ -96,9 +98,10 @@ fn rocket() -> _ {
     
     // Cria o pool de conexões
     let pool = db::create_pool();
+    let container = core::di::container::Container::new(pool.clone());
     
     rocket::build()
-        .manage(pool)
+        .attach(container)
         .mount("/api/v1", routes![index])
         .mount("/api/v1/auth", routes![register, get_users])
 }
